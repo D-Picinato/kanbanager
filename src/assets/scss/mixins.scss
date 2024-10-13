@@ -1,0 +1,12 @@
+@use './variables.scss' as *;
+
+@mixin glass {
+  box-shadow: 0 8rem 16rem $tom-escuro-20;
+  background: $white-80;
+  backdrop-filter: blur(16rem);
+  transition: box-shadow .3s ease;
+
+  &:hover {
+    box-shadow: 0 8rem 16rem 4rem $tom-escuro-20;
+  }
+}

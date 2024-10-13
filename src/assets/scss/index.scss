@@ -1,0 +1,282 @@
+@use './variables.scss' as *;
+@use './mixins.scss' as *;
+@use './fonts.scss';
+
+:root {
+  --primary: #732EDB;
+  --primary-20: #732EDB33;
+
+  --secondary: #360089;
+
+  --accent: #DCD507;
+
+  --white: #FFF;
+  --white-80: #FFFFFFCC;
+  --tom-claro: #EEE3FF;
+  --tom-escuro: #0A0018;
+  --tom-escuro-20: #0A001833;
+
+  --gradient: linear-gradient(45deg, var(--primary), var(--secondary));
+  --background: linear-gradient(var(--tom-claro) 144rem, var(--primary) 144rem, var(--secondary));
+
+  --border: solid 1px var(--primary-20);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline-color: $primary;
+}
+
+html {
+  font-size: 1px;
+}
+
+@media (max-width: 425px) {
+  html {
+    font-size: .2352941176470588vw;
+  }
+}
+
+::selection {
+  background: $accent;
+}
+
+::-webkit-scrollbar {
+  width: 8rem;
+  height: 8rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 8rem;
+}
+
+body {
+  font-size: 16rem;
+  font-family: 'Raleway';
+  line-height: 1;
+  cursor: default;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Raleway bold';
+  color: $secondary;
+}
+
+h1 {
+  font-size: 40rem;
+}
+
+h2 {
+  font-size: 32rem;
+}
+
+h3 {
+  font-size: 24rem;
+}
+
+h4,
+button,
+input {
+  font-size: 16rem;
+}
+
+a {
+  text-decoration: none;
+  color: $secondary;
+  cursor: pointer;
+}
+
+button {
+  display: flex;
+  border: none;
+  background: none;
+  font-family: 'Raleway';
+  color: $secondary;
+  cursor: pointer;
+}
+
+input {
+  width: 320rem;
+}
+
+#root {
+  background: $background;
+  height: 100vh;
+  overflow: hidden;
+  padding: 16rem;
+  display: grid;
+  gap: 16rem;
+  grid-template: min-content 1fr / min-content 1fr;
+  grid-template-areas:
+    'header header'
+    'nav main'
+  ;
+}
+
+header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+
+  .title {
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+
+    img {
+      height: 32rem;
+    }
+  }
+
+  >span {
+    justify-self: center;
+  }
+}
+
+nav {
+  grid-area: nav;
+  @include glass;
+  padding: 8rem;
+  border-radius: 16rem;
+
+  a {
+    border-radius: 8rem;
+    padding: 8rem;
+    gap: 8rem;
+    display: flex;
+    align-items: center;
+    transition: all .3s ease;
+
+    &:hover,
+    &.active {
+      background: $primary-20;
+    }
+
+    &.active {
+      &:not(:last-child) {
+        margin-bottom: 8rem;
+      }
+
+      &:not(:first-child) {
+        margin-top: 8rem;
+      }
+    }
+
+    svg {
+      font-size: 24rem;
+    }
+  }
+}
+
+main {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 16rem;
+  padding: 0 16rem;
+  overflow: auto;
+
+  .titlePage {
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+  }
+
+  section {
+    @include glass;
+    padding: 16rem;
+    border-radius: 16rem;
+    display: flex;
+    flex-direction: column;
+    gap: 16rem;
+
+    h3 {
+      padding: 8rem;
+    }
+  }
+}
+
+table {
+  @include glass;
+  width: 100%;
+  border-spacing: 0 8rem;
+  padding: 8rem 16rem;
+  border-radius: 16rem;
+
+  td,
+  th {
+    text-align: center;
+    padding: 8rem;
+
+    &:first-child {
+      text-align: left;
+    }
+
+    &:last-child {
+      text-align: right;
+      width: 0;
+    }
+  }
+
+  thead {
+    * {
+      font-family: 'Raleway bold';
+      color: $secondary;
+    }
+
+    th {
+      button {
+        display: flex;
+        gap: 8rem;
+        align-items: center;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      td {
+        transition: background .3s ease;
+
+        &:first-child {
+          border-radius: 8rem 0 0 8rem;
+        }
+
+        &:last-child {
+          border-radius: 0 8rem 8rem 0;
+          text-align: right;
+        }
+
+        &.notFound {
+          border-radius: 8rem;
+          text-align: center;
+        }
+      }
+
+      &:hover {
+        td {
+          background: $primary-20;
+        }
+      }
+    }
+  }
+}
+
+.grid-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 16rem;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+  gap: 16rem;
+}

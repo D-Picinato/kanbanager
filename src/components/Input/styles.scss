@@ -1,0 +1,44 @@
+@use '../../assets/scss/variables.scss' as *;
+@use '../../assets/scss/mixins.scss' as *;
+
+.Input {
+  position: relative;
+
+  .label {
+    position: absolute;
+    pointer-events: none;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 16rem;
+    top: 0;
+    left: 0;
+    transition: all .3s ease;
+
+    label {
+      transition: all .3s ease;
+    }
+  }
+
+  input {
+    border: $border;
+    height: 40rem;
+    padding: 0 16rem;
+    border-radius: 8rem;
+    @include glass;
+  }
+
+  input:focus+.label,
+  .label.valued {
+    top: -18rem;
+
+    label {
+      background: $tom-claro;
+      font-size: 12rem;
+      box-shadow: none;
+      border-radius: 4rem;
+      padding: 2rem 4rem;
+    }
+  }
+}
