@@ -61,6 +61,10 @@ body {
   cursor: default;
 }
 
+hr {
+  border: $border;
+}
+
 h1,
 h2,
 h3,
@@ -107,8 +111,9 @@ button {
   background: none;
 
   &.button {
-    align-items: center;
+    width: 100%;
     justify-content: center;
+    align-items: center;
     padding: 8rem;
     border-radius: 8rem;
     height: 40rem;
@@ -241,20 +246,21 @@ main {
 
 table {
   @include glass;
-  width: 100%;
   border-spacing: 0 8rem;
   padding: 8rem 16rem;
   border-radius: 16rem;
-
-  button {
-    padding: 0;
-    height: 100%;
-  }
 
   td,
   th {
     text-align: center;
     padding: 8rem;
+
+    &:not(:first-child):not(:last-child) {
+      button {
+        width: 100%;
+        justify-content: center;
+      }
+    }
 
     &:first-child {
       text-align: left;
@@ -294,13 +300,6 @@ table {
         &.notFound {
           border-radius: 8rem;
           text-align: center;
-        }
-
-        .moreOptions {
-          button {
-            width: 100%;
-            padding: 8rem;
-          }
         }
       }
 

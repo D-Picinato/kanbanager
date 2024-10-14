@@ -34,7 +34,7 @@ export default function AddProject() {
         <h3>Crie um Projeto</h3>
         <form onSubmit={projectSubmit} autoComplete="off">
           <Input required idname='name' label='Nome do projeto' />
-          <Textarea idname='description' label='Descrição' />
+          <Input idname='description' label='Descrição' />
           <button className="button primary">
             <span>Criar</span>
             <MdOutlineKeyboardArrowRight />

@@ -18,7 +18,18 @@ class ProjectModel {
     this.#list.push({
       id: `${formData.get('name')}-${Date.now()}${Math.random()}`,
       name: formData.get('name'),
-      description: formData.get('description')
+      description: formData.get('description'),
+      columns: [
+        {
+          name: 'Backlog'
+        },
+        {
+          name: 'Em andamento'
+        },
+        {
+          name: 'Concluído'
+        }
+      ]
     })
 
     this.#saveStorage()
@@ -30,13 +41,13 @@ class ProjectModel {
   }
 
   // Método para recuperar um projeto
-  get = (id) => {
-    return this.#list.filter(item => item.id == id)[0]
+  get = projectId => {
+    return this.#list.filter(item => item.id == projectId)[0]
   }
 
   // Método para remover um projeto
-  remove = id => {
-    this.#list = this.#list.filter(item => item.id != id)
+  remove = projectId => {
+    this.#list = this.#list.filter(item => item.id != projectId)
 
     this.#saveStorage()
   }

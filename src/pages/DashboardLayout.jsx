@@ -4,10 +4,13 @@ import useAppContext from "../contexts/AppContext"
 import { useNavContext } from "../contexts/NavContext"
 
 import Logo from "../components/Logo"
+import Modal from "../components/Modal"
+import useModalContext from "../contexts/ModalContext"
 
 export default function DashboardLayout() {
   const { path } = useAppContext()
   const { nav, navIndex } = useNavContext()
+  const { showModal } = useModalContext()
 
   return <>
     <header>
@@ -28,5 +31,6 @@ export default function DashboardLayout() {
     <main>
       <Outlet />
     </main>
+    {showModal && <Modal />}
   </>
 }

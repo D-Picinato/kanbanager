@@ -23,6 +23,7 @@ import ProjectOutlet from './pages/Project'
 import ProjectSettings from './pages/Project/Settings'
 import ProjectCreateIssue from './pages/Project/CreateIssue'
 import ProjectQuadro from './pages/Project/Quadro'
+import { ModalContextProvider } from './contexts/ModalContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -33,53 +34,57 @@ createRoot(document.getElementById('root')).render(
       {/* Contexto com os estados da Navbar */}
       <NavContextProvider>
 
-        <BrowserRouter>
-          <Routes>
+        {/* Contexto para controlar o Modal e seus estados */}
+        <ModalContextProvider>
 
-            {/* DASHBOARD */}
-            <Route path='/' element={<DashboardLayout />}>
+          <BrowserRouter>
+            <Routes>
 
-              {/* MAIN */}
-              <Route path='' element={<MainOutlet />}>
+              {/* DASHBOARD */}
+              <Route path='/' element={<DashboardLayout />}>
 
-                {/* PROJETOS */}
-                <Route path='' element={<ProjectsPage />}></Route>
+                {/* MAIN */}
+                <Route path='' element={<MainOutlet />}>
 
-                {/* ADICIONAR PROJETO */}
-                <Route path='addproject' element={<AddProject />}></Route>
+                  {/* PROJETOS */}
+                  <Route path='' element={<ProjectsPage />}></Route>
 
-                {/* CONFIGURAÇÕES */}
-                <Route path='settings' element={<SettingsPage />}></Route>
+                  {/* ADICIONAR PROJETO */}
+                  <Route path='addproject' element={<AddProject />}></Route>
+
+                  {/* CONFIGURAÇÕES */}
+                  <Route path='settings' element={<SettingsPage />}></Route>
+
+                </Route>
+                {/* MAIN */}
+
+                {/* PROJETO */}
+                <Route path='projects/:PROJECTID' element={<ProjectOutlet />}>
+
+                  {/* QUADRO */}
+                  <Route path='' element={<ProjectQuadro />}></Route>
+
+                  {/* CRIAR ISSUE */}
+                  <Route path='createIssue' element={<ProjectCreateIssue />}></Route>
+
+                  {/* CONFIGURAÇÕES */}
+                  <Route path='settings' element={<ProjectSettings />}></Route>
+
+                  {/* 404 */}
+                  <Route path='*' element={<Navigate to='' />}></Route>
+
+                </Route>
+                {/* PROJETO */}
 
               </Route>
-              {/* MAIN */}
+              {/* DASHBOARD */}
 
-              {/* PROJETO */}
-              <Route path='projects/:PROJECTID' element={<ProjectOutlet />}>
+              {/* 404 */}
+              <Route path='*' element={<Navigate to='/' />}></Route>
 
-                {/* QUADRO */}
-                <Route path='' element={<ProjectQuadro />}></Route>
-
-                {/* CRIAR ISSUE */}
-                <Route path='createIssue' element={<ProjectCreateIssue />}></Route>
-
-                {/* CONFIGURAÇÕES */}
-                <Route path='settings' element={<ProjectSettings />}></Route>
-
-                {/* 404 */}
-                <Route path='*' element={<Navigate to='' />}></Route>
-
-              </Route>
-              {/* PROJETO */}
-
-            </Route>
-            {/* DASHBOARD */}
-
-            {/* 404 */}
-            <Route path='*' element={<Navigate to='/' />}></Route>
-
-          </Routes>
-        </BrowserRouter>
+            </Routes>
+          </BrowserRouter>
+        </ModalContextProvider>
       </NavContextProvider>
     </AppContextProvider>
   </StrictMode>,

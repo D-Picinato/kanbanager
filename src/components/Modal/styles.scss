@@ -1,0 +1,30 @@
+@use '../../assets/scss/mixins.scss' as *;
+@use '../../assets/scss/variables.scss' as *;
+
+.ModalScreen {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: $tom-escuro-20;
+  backdrop-filter: blur(4rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .Modal {
+    @include glass;
+    padding: 16rem;
+    border-radius: 16rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+
+    h3,
+    .content {
+      padding: 8rem;
+    }
+  }
+}
