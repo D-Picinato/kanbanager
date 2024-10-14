@@ -12,7 +12,7 @@ class ProjectModel {
   }
 
   // Método para criar um projeto
-  save = e => {
+  create = e => {
     const formData = new FormData(e.target)
 
     this.#list.push({

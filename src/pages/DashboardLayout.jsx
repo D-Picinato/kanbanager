@@ -1,7 +1,9 @@
 import { NavLink, Outlet } from "react-router-dom"
+
 import useAppContext from "../contexts/AppContext"
-import Logo from "../components/Logo"
 import { useNavContext } from "../contexts/NavContext"
+
+import Logo from "../components/Logo"
 
 export default function DashboardLayout() {
   const { path } = useAppContext()

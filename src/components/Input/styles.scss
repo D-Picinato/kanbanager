@@ -1,8 +1,33 @@
 @use '../../assets/scss/variables.scss' as *;
 @use '../../assets/scss/mixins.scss' as *;
 
-.Input {
+.Input,
+.Textarea {
   position: relative;
+  border-bottom: $border;
+  border-radius: 8rem;
+  padding-top: 16rem;
+
+  * {
+    outline: none;
+  }
+
+  &.fill {
+    @include glass;
+  }
+
+  input,
+  textarea {
+    border: none;
+    background: none;
+    padding: 8rem 16rem;
+    border-radius: 8rem;
+    width: 100%;
+  }
+
+  textarea {
+    min-height: 40rem !important;
+  }
 
   .label {
     position: absolute;
@@ -11,34 +36,26 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 0 16rem;
+    padding: 14rem 16rem;
     top: 0;
     left: 0;
     transition: all .3s ease;
 
     label {
       transition: all .3s ease;
+      width: fit-content;
     }
   }
 
-  input {
-    border: $border;
-    height: 40rem;
-    padding: 0 16rem;
-    border-radius: 8rem;
-    @include glass;
-  }
-
   input:focus+.label,
+  textarea:focus+.label,
   .label.valued {
-    top: -18rem;
+    height: 16rem;
 
     label {
-      background: $tom-claro;
+      color: $tom-escuro-50;
       font-size: 12rem;
-      box-shadow: none;
       border-radius: 4rem;
-      padding: 2rem 4rem;
     }
   }
 }

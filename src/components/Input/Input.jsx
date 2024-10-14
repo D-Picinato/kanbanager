@@ -2,13 +2,13 @@ import './styles.scss'
 import { useState } from 'react'
 
 /**
- * @param {React.InputHTMLAttributes} props
+ * @param {React.InputHTMLAttributes<HTMLInputElement>} props
  */
 
-export default function Input({ idname, label, onChange, ...props }) {
+export default function Input({ idname, label, bgFill, onChange, ...props }) {
   const [currentValue, setCurrentValue] = useState()
 
-  return <div className="Input">
+  return <div className={"Input" + (bgFill ? ' fill' : '')}>
     <input
       id={idname}
       name={idname}

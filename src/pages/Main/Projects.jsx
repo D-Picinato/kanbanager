@@ -1,5 +1,5 @@
 import { HiOutlineArrowDown, HiOutlineDocumentArrowDown, HiOutlineEllipsisHorizontal, HiOutlineTrash } from "react-icons/hi2"
-import Input from "../../components/Input"
+import Input from "../../components/Input/Input"
 import { useEffect, useState } from "react"
 import projectModel from "../../models/project"
 import Dropdown from "../../components/Dropdown"
@@ -24,15 +24,14 @@ export default function ProjectsPage() {
       <h2>Projetos Kanban</h2>
       <p>Gerencie seus projetos de forma simples e eficiente com o método ágil Kanban</p>
     </div>
-    <div className="row">
-      <Input
-        type="text"
-        idname="search"
-        label="Pesquise um projeto"
-        autoComplete="off"
-        onChange={e => { setProjectList(projectModel.list().filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))) }}
-      />
-    </div>
+    <Input
+      type="text"
+      idname="search"
+      label="Pesquise um projeto"
+      autoComplete="off"
+      bgFill={true}
+      onChange={e => { setProjectList(projectModel.list().filter(item => item.name.toLowerCase().includes(e.target.value.toLowerCase()))) }}
+    />
     {projectList.length > 0
       ? <table>
         <thead>
@@ -60,11 +59,11 @@ export default function ProjectsPage() {
             <td>
               <Dropdown justify='left' align='center' icon={<HiOutlineEllipsisHorizontal />}>
                 <div className="moreOptions">
-                  <button className="normal">
+                  <button className="button left normal">
                     <HiOutlineDocumentArrowDown />
                     <span>Exportar</span>
                   </button>
-                  <button className="red" onClick={() => handleRemoveItem(item.id)}>
+                  <button className="button left red" onClick={() => handleRemoveItem(item.id)}>
                     <HiOutlineTrash />
                     <span>Excluir</span>
                   </button>
