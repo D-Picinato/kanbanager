@@ -1,19 +1,24 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react"
 
 const AppContext = createContext()
 
 export function AppContextProvider({ children }) {
-  const [nav, setNav] = useState('main')
-  const [path, setPath] = useState('')
 
+  const [path, setPath] = useState('') // Armazena o caminho atual da dashboard
+  const [project, setProject] = useState() // Armazena o projeto atual aberto
+
+  // Propagação dos estados do AppContext
   return <AppContext.Provider value={{
-    nav, setNav,
+
     path, setPath,
+    project, setProject,
+
   }}>
     {children}
   </AppContext.Provider>
 }
 
+// Hook para recuperar os estados do AppContext
 export default function useAppContext() {
   const context = useContext(AppContext)
 

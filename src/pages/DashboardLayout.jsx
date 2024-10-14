@@ -1,41 +1,23 @@
-import { NavLink, Outlet } from "react-router-dom";
-import useAppContext from "../contexts/AppContext";
-import { HiOutlineCog6Tooth, HiOutlineSquare3Stack3D, HiOutlineSquaresPlus } from "react-icons/hi2";
-
-const navIndex = {
-  main: [
-    {
-      label: 'Projetos',
-      url: '/',
-      icon: <HiOutlineSquare3Stack3D />
-    },
-    {
-      label: 'Adicionar',
-      url: '/addproject',
-      icon: <HiOutlineSquaresPlus />
-    },
-    {
-      label: 'Configurações',
-      url: '/settings',
-      icon: <HiOutlineCog6Tooth />
-    },
-  ]
-}
+import { NavLink, Outlet } from "react-router-dom"
+import useAppContext from "../contexts/AppContext"
+import Logo from "../components/Logo"
+import { useNavContext } from "../contexts/NavContext"
 
 export default function DashboardLayout() {
-  const { nav, path } = useAppContext()
+  const { path } = useAppContext()
+  const { nav, navIndex } = useNavContext()
 
   return <>
     <header>
       <div className="title">
-        <img src='logo.svg' alt="Kanbanager" />
+        <Logo />
         <h3>Kanbanager</h3>
       </div>
       <span>{path}</span>
     </header>
     <nav>
-      {navIndex[nav].map((item, i) => (
-        <NavLink to={item.url} key={i}>
+      {nav && nav[navIndex].map((item, i) => (
+        <NavLink to={item.url} key={i} end={item.end ? true : false}>
           {item.icon}
           <span>{item.label}</span>
         </NavLink>

@@ -94,11 +94,29 @@ a {
 
 button {
   display: flex;
+  align-items: center;
   border: none;
   background: none;
   font-family: 'Raleway';
   color: $secondary;
   cursor: pointer;
+  gap: 8rem;
+  padding: 8rem;
+  border-radius: 8rem;
+
+  &.normal {
+    &:hover {
+      background: $primary-20;
+    }
+  }
+
+  &.red {
+    color: red;
+
+    &:hover {
+      background: #ff000033;
+    }
+  }
 }
 
 input {
@@ -168,6 +186,10 @@ nav {
       }
     }
 
+    span {
+      text-wrap: nowrap;
+    }
+
     svg {
       font-size: 24rem;
     }
@@ -209,6 +231,11 @@ table {
   padding: 8rem 16rem;
   border-radius: 16rem;
 
+  button {
+    padding: 0;
+    height: 100%;
+  }
+
   td,
   th {
     text-align: center;
@@ -221,6 +248,10 @@ table {
     &:last-child {
       text-align: right;
       width: 0;
+
+      >* {
+        display: inline-flex;
+      }
     }
   }
 
@@ -228,14 +259,6 @@ table {
     * {
       font-family: 'Raleway bold';
       color: $secondary;
-    }
-
-    th {
-      button {
-        display: flex;
-        gap: 8rem;
-        align-items: center;
-      }
     }
   }
 
@@ -257,10 +280,17 @@ table {
           border-radius: 8rem;
           text-align: center;
         }
+
+        .moreOptions {
+          button {
+            width: 100%;
+            padding: 8rem;
+          }
+        }
       }
 
       &:hover {
-        td {
+        td:not(.notFound) {
           background: $primary-20;
         }
       }

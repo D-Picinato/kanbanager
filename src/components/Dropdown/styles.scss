@@ -1,5 +1,57 @@
+@use '../../assets/scss/mixins.scss' as *;
+@use '../../assets/scss/variables.scss' as *;
+
 .Dropdown {
-  >*:not(.floatContainer) {
-    font-size: 24rem;
+  position: relative;
+
+  >button {
+    .iconContainer {
+      display: flex;
+      align-items: center;
+      font-size: 24rem;
+    }
+  }
+
+  .floatContainer {
+    z-index: 1;
+    position: absolute;
+
+    &.justify {
+      &-center {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      &-left {
+        right: calc(100% + 8rem);
+      }
+
+      &-right {
+        left: calc(100% + 8rem);
+      }
+    }
+
+    &.align {
+      &-center {
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
+
+      &-bottom {
+        top: calc(100% + 8rem);
+      }
+
+      &-top {
+        bottom: calc(100% + 8rem);
+      }
+    }
+
+    .container {
+      @include glass;
+      padding: 8rem;
+      border-radius: 16rem;
+    }
   }
 }
