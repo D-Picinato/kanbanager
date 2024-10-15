@@ -79,9 +79,6 @@ createRoot(document.getElementById('root')).render(
               </Route>
               {/* DASHBOARD */}
 
-              {/* 404 */}
-              <Route path='*' element={<Navigate to='/' />}></Route>
-
             </Routes>
           </BrowserRouter>
         </ModalContextProvider>
