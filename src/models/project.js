@@ -21,15 +21,19 @@ class ProjectModel {
       description: formData.get('description'),
       columns: [
         {
+          id: `${formData.get('name')}-Backlog-${Date.now()}${Math.random()}`,
           name: 'Backlog'
         },
         {
+          id: `${formData.get('name')}-Em andamento-${Date.now()}${Math.random()}`,
           name: 'Em andamento'
         },
         {
+          id: `${formData.get('name')}-Concluído-${Date.now()}${Math.random()}`,
           name: 'Concluído'
         }
-      ]
+      ],
+      issues: []
     })
 
     this.#saveStorage()
@@ -50,6 +54,27 @@ class ProjectModel {
     this.#list = this.#list.filter(item => item.id != projectId)
 
     this.#saveStorage()
+  }
+
+  // Método para gerar e baixar um arquivo JSON do projeto
+  exportFile = projectId => {
+    const project = this.get(projectId)
+    const blob = new Blob([JSON.stringify(project)], { type: 'application/json' })
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = `${project.name}.kanbanager`
+    a.click()
+    URL.revokeObjectURL(URL.createObjectURL(blob))
+  }
+
+  // Método para importar um arquivo JSON com o projeto
+  importFile = obj => {
+    if (!this.get(obj.id)) {
+      this.#list.push(obj)
+      this.#saveStorage()
+    } else {
+      alert('Você já possui esse projeto!')
+    }
   }
 }
 

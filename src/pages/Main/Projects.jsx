@@ -80,7 +80,10 @@ export default function ProjectsPage() {
                 <td>
                   <Dropdown justify='left' align='center' icon={<HiOutlineEllipsisHorizontal />}>
                     <div className="moreOptions">
-                      <button className="button left normal">
+                      <button
+                        className="button left normal"
+                        onClick={() => projectModel.exportFile(item.id)}
+                      >
                         <HiOutlineDocumentArrowDown />
                         <span>Exportar</span>
                       </button>
@@ -104,7 +107,7 @@ export default function ProjectsPage() {
           </tbody>
         </table >
         : <section>
-          <p>Nenhum projeto encontrado! <Link to='/addproject'>Adicione um projeto &rsaquo</Link></p>
+          <p>Nenhum projeto encontrado! <Link to='/addproject'>Adicione um projeto &rsaquo;</Link></p>
         </section>
       }
     </>
