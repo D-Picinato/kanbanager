@@ -8,6 +8,7 @@ import './assets/scss/index.scss'
 // Contexts
 import { AppContextProvider } from './contexts/AppContext'
 import { NavContextProvider } from './contexts/NavContext'
+import { ModalContextProvider } from './contexts/ModalContext'
 
 // Dashboard Layout
 import DashboardLayout from './pages/DashboardLayout'
@@ -23,7 +24,6 @@ import ProjectOutlet from './pages/Project'
 import ProjectSettings from './pages/Project/Settings'
 import ProjectCreateIssue from './pages/Project/CreateIssue'
 import ProjectQuadro from './pages/Project/Quadro'
-import { ModalContextProvider } from './contexts/ModalContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -78,6 +78,9 @@ createRoot(document.getElementById('root')).render(
 
               </Route>
               {/* DASHBOARD */}
+
+              {/* 404 */}
+              <Route path='*' element={<Navigate to='/' />}></Route>
 
             </Routes>
           </BrowserRouter>
