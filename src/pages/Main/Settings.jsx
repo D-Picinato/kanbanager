@@ -8,5 +8,9 @@ export default function SettingsPage() {
     setPath('Configurações')
   }, [])
 
-  return <></>
+  return <>
+    <div className="titlePage">
+      <h2>Configurações</h2>
+    </div>
+  </>
 }

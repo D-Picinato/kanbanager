@@ -6,9 +6,7 @@ export default function ProjectCreateIssue() {
   const { project, setPath } = useAppContext()
 
   useEffect(() => {
-    if (project) {
-      setPath(<span><Link to='/'>Projetos</Link> / {project.name} / Criar Issue</span>)
-    }
+    setPath(<span><Link to='/'>Projetos</Link> / {project.name} / Criar Issue</span>)
   }, [project])
 
   return <>

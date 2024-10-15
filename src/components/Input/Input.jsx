@@ -6,7 +6,7 @@ import { useState } from 'react'
  */
 
 export default function Input({ idname, label, bgFill, onChange, ...props }) {
-  const [currentValue, setCurrentValue] = useState()
+  const [currentValue, setCurrentValue] = useState(props.defaultValue)
 
   return <div className={"Input" + (bgFill ? ' fill' : '')}>
     <input

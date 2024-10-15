@@ -19,18 +19,18 @@ class ProjectModel {
       id: `${formData.get('name')}-${Date.now()}${Math.random()}`,
       name: formData.get('name'),
       description: formData.get('description'),
-      columns: [
+      stages: [
         {
-          id: `${formData.get('name')}-Backlog-${Date.now()}${Math.random()}`,
-          name: 'Backlog'
+          id: `${formData.get('name')}-A Fazer-${Date.now()}${Math.random()}`,
+          name: 'A Fazer',
         },
         {
           id: `${formData.get('name')}-Em andamento-${Date.now()}${Math.random()}`,
-          name: 'Em andamento'
+          name: 'Em andamento',
         },
         {
           id: `${formData.get('name')}-Concluído-${Date.now()}${Math.random()}`,
-          name: 'Concluído'
+          name: 'Concluído',
         }
       ],
       issues: []
@@ -52,6 +52,19 @@ class ProjectModel {
   // Método para remover um projeto
   remove = projectId => {
     this.#list = this.#list.filter(item => item.id != projectId)
+
+    this.#saveStorage()
+  }
+
+  // Método para atualizar um projeto
+  update = (projectId, obj) => {
+    this.#list = this.#list.map(item => {
+      if (item.id == projectId) {
+        return { ...item, ...obj }
+      }
+
+      return item
+    })
 
     this.#saveStorage()
   }

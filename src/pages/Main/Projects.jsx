@@ -1,7 +1,7 @@
 import { HiOutlineArrowDown, HiOutlineArrowUp, HiOutlineDocumentArrowDown, HiOutlineEllipsisHorizontal, HiOutlineTrash } from "react-icons/hi2"
 import Input from "../../components/Input/Input"
 import { useEffect, useState } from "react"
-import projectModel from "../../models/project"
+import projectModel from "../../models/projectModel"
 import Dropdown from "../../components/Dropdown"
 import { Link } from "react-router-dom"
 import useAppContext from "../../contexts/AppContext"

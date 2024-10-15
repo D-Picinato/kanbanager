@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { MdOutlineKeyboardArrowRight } from "react-icons/md"
 import useAppContext from "../../contexts/AppContext"
 import Input from "../../components/Input/Input"
-import projectModel from '../../models/project'
+import projectModel from '../../models/projectModel'
 
 export default function AddProject() {
   const navigate = useNavigate()
@@ -68,6 +68,7 @@ export default function AddProject() {
       <div className="grid-row">
         <section>
           <h3>Crie um Projeto</h3>
+          <hr />
           <form onSubmit={handleProjectSubmit} autoComplete="off">
             <Input required idname='name' label='Nome do projeto' />
             <Input idname='description' label='Descrição' />
@@ -79,13 +80,14 @@ export default function AddProject() {
         </section>
         <section>
           <h3>Ou Importe um Projeto</h3>
+          <hr />
           <div
             className={`file-drop-area ${dragActive ? 'active' : ''}`}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
           >
-            <p>Arraste o arquivo .kanbanager aqui ou</p>
+            <p>Solte um arquivo .kanbanager aqui ou</p>
             <input type="file" accept=".kanbanager" onChange={handleFileChange} />
             <button type="button" className="button">Selecione o arquivo</button>
           </div>
