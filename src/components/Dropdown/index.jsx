@@ -11,7 +11,7 @@ export default function Dropdown({ icon, children, justify, align }) {
         if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
           setShow(false)
         }
-        setTimeout(() => setShow(false), 100)
+        setTimeout(() => setShow(false), 200)
       }
 
       document.addEventListener('mousedown', handleClick)
