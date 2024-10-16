@@ -18,6 +18,7 @@
 
     &.justify {
       &-center {
+        left: 0;
         width: 100%;
         display: flex;
         justify-content: center;
@@ -34,13 +35,14 @@
 
     &.align {
       &-center {
+        top: 0;
         height: 100%;
         display: flex;
         align-items: center;
       }
 
       &-bottom {
-        top: calc(100% + 8rem);
+        top: 0;
       }
 
       &-top {

@@ -259,7 +259,7 @@ main {
   .kanbanStages {
     display: flex;
     gap: 16rem;
-    height: 100%;
+    width: fit-content;
 
     section {
       width: 320rem;
@@ -269,7 +269,7 @@ main {
         background: $primary-20;
         padding: 8rem;
         border-radius: 8rem;
-        height: 100%;
+        min-height: 100rem;
       }
     }
   }
@@ -361,6 +361,16 @@ form {
   display: flex;
   align-items: center;
   gap: 16rem;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.no-gap {
+  gap: 0;
 }
 
 .file-drop-area {

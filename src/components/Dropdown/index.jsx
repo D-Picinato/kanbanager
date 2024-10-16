@@ -6,18 +6,21 @@ export default function Dropdown({ icon, children, justify, align }) {
   const dropdownRef = useRef(null)
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setShow(false)
+    if (show) {
+      const handleClick = e => {
+        if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+          setShow(false)
+        }
+        setTimeout(() => setShow(false), 100)
+      }
+
+      document.addEventListener('mousedown', handleClick)
+
+      return () => {
+        document.removeEventListener('mousedown', handleClick)
       }
     }
-
-    document.addEventListener('mousedown', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [dropdownRef])
+  }, [show])
 
   return (
     <div className="Dropdown" ref={dropdownRef}>

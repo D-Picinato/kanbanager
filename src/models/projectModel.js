@@ -7,7 +7,7 @@ class ProjectModel {
   }
 
   // Método para salvar a lista de projetos `#list` no localStorage
-  #saveStorage = () => {
+  #saveList = () => {
     localStorage.setItem('projects', JSON.stringify(this.#list))
   }
 
@@ -21,22 +21,22 @@ class ProjectModel {
       description: formData.get('description'),
       stages: [
         {
-          id: `${formData.get('name')}-A Fazer-${Date.now()}${Math.random()}`,
+          id: `${formData.get('name')}-stage-${Date.now()}${Math.random()}`,
           name: 'A Fazer',
         },
         {
-          id: `${formData.get('name')}-Em andamento-${Date.now()}${Math.random()}`,
+          id: `${formData.get('name')}-stage-${Date.now()}${Math.random()}`,
           name: 'Em andamento',
         },
         {
-          id: `${formData.get('name')}-Concluído-${Date.now()}${Math.random()}`,
+          id: `${formData.get('name')}-stage-${Date.now()}${Math.random()}`,
           name: 'Concluído',
         }
       ],
       issues: []
     })
 
-    this.#saveStorage()
+    this.#saveList()
   }
 
   // Método para listar os projetos
@@ -53,7 +53,7 @@ class ProjectModel {
   remove = projectId => {
     this.#list = this.#list.filter(item => item.id != projectId)
 
-    this.#saveStorage()
+    this.#saveList()
   }
 
   // Método para atualizar um projeto
@@ -66,7 +66,7 @@ class ProjectModel {
       return item
     })
 
-    this.#saveStorage()
+    this.#saveList()
   }
 
   // Método para gerar e baixar um arquivo JSON do projeto
@@ -84,7 +84,7 @@ class ProjectModel {
   importFile = obj => {
     if (!this.get(obj.id)) {
       this.#list.push(obj)
-      this.#saveStorage()
+      this.#saveList()
     } else {
       alert('Você já possui esse projeto!')
     }
