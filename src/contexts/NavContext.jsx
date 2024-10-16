@@ -24,11 +24,11 @@ export function NavContextProvider({ children }) {
           url: '/addproject',
           icon: <HiOutlineSquaresPlus />
         },
-        {
-          label: 'Configurações',
-          url: '/settings',
-          icon: <HiOutlineCog6Tooth />
-        },
+        // {
+        //   label: 'Configurações',
+        //   url: '/settings',
+        //   icon: <HiOutlineCog6Tooth />
+        // },
       ],
       project: [
         {
