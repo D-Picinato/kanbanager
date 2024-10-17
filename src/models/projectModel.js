@@ -16,20 +16,20 @@ class ProjectModel {
     const formData = new FormData(e.target)
 
     this.#list.push({
-      id: `${formData.get('name')}-${Date.now()}${Math.random()}`,
+      id: `${Date.now()}${Math.random()}${Math.random()}`,
       name: formData.get('name'),
       description: formData.get('description'),
       stages: [
         {
-          id: `${formData.get('name')}-stage-${Date.now()}${Math.random()}`,
+          id: `${Date.now()}${Math.round()}${Math.round()}`,
           name: 'A Fazer',
         },
         {
-          id: `${formData.get('name')}-stage-${Date.now()}${Math.random()}`,
+          id: `${Date.now()}${Math.round()}${Math.round()}`,
           name: 'Em andamento',
         },
         {
-          id: `${formData.get('name')}-stage-${Date.now()}${Math.random()}`,
+          id: `${Date.now()}${Math.round()}${Math.round()}`,
           name: 'Concluído',
         }
       ],
@@ -46,7 +46,25 @@ class ProjectModel {
 
   // Método para recuperar um projeto
   get = projectId => {
-    return this.#list.filter(item => item.id == projectId)[0]
+    const filteredProject = this.#list.filter(item => item.id == projectId)[0]
+
+    if (!filteredProject) location.reload()
+    // if (!filteredProject) throw new Error('Projeto não encontrado!')
+
+    /**
+     * Deixei com esse if para recarregar a página quando não encontra o projeto, por causa deste bug:
+     * 
+     * Quando você criar um projeto e logo em seguida o abrir, o stageModel irá buscar o projeto através do método
+     * projectModel.get(), o método consegue recuperar todos os projetos corretamente, mas ele por algum motivo dá erro,
+     * alegando que o projeto não foi encontrado.
+     * 
+     * Eu só desisti de tentar resolver esse bug agora, então coloquei essa gambiarra de if para recarregar a página,
+     * que assim o bug só é ignorado e as coisas voltam a funcionar magicamente.
+     * 
+     * Outra hora eu venho arrumar esse bug.
+    */
+
+    return filteredProject
   }
 
   // Método para remover um projeto
@@ -80,7 +98,7 @@ class ProjectModel {
     URL.revokeObjectURL(URL.createObjectURL(blob))
   }
 
-  // Método para importar um arquivo JSON com o projeto
+  // Método para importar um objeto com o projeto
   importFile = obj => {
     if (!this.get(obj.id)) {
       this.#list.push(obj)

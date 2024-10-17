@@ -1,3 +1,4 @@
+import IssueModel from "./issueModel"
 import projectModel from "./projectModel"
 
 export default class StageModel {
@@ -18,7 +19,7 @@ export default class StageModel {
   // Método para criar um stage
   create = name => {
     this.#list.push({
-      id: `${projectModel.get(this.#projectId).name}-stage-${Date.now()}${Math.random()}`,
+      id: `${Date.now()}${Math.round()}${Math.round()}`,
       name: name,
     })
 
@@ -37,16 +38,24 @@ export default class StageModel {
 
   // Método para remover um stage
   remove = stageId => {
+    const issueModel = new IssueModel(this.#projectId)
+
+    issueModel.list().map(issue => {
+      if (issue.idStageParent === stageId) {
+        issueModel.update(issue.id, { idStageParent: null })
+      }
+    })
+
     this.#list = this.#list.filter(item => item.id != stageId)
 
     this.#saveList()
   }
 
-  // Método para atualizar o nome de um stage
-  update = (stageId, name) => {
+  // Método para atualizar um stage
+  update = (stageId, obj) => {
     this.#list = this.#list.map(item => {
       if (item.id == stageId) {
-        return { ...item, name: name }
+        return { ...item, ...obj }
       }
 
       return item
@@ -56,7 +65,7 @@ export default class StageModel {
   }
 
   // Método para mover o stage para a direita
-  moveToRight = (stageId) => {
+  moveToRight = stageId => {
     const index = this.#list.findIndex(stage => stage.id === stageId)
     if (index < this.#list.length - 1) {
       [this.#list[index], this.#list[index + 1]] = [this.#list[index + 1], this.#list[index]]
@@ -65,7 +74,7 @@ export default class StageModel {
   }
 
   // Método para mover o stage para a esquerda
-  moveToLeft = (stageId) => {
+  moveToLeft = stageId => {
     const index = this.#list.findIndex(stage => stage.id === stageId)
     if (index > 0) {
       [this.#list[index], this.#list[index - 1]] = [this.#list[index - 1], this.#list[index]]

@@ -1,7 +1,17 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, Children, cloneElement } from 'react'
 import './styles.scss'
 
-export default function Dropdown({ icon, children, justify, align }) {
+/**
+ * @param {{
+ *  icon: JSX.Element,
+ *  children: React.ReactNode,
+ *  buttonClass: String,
+ *  justify?: 'left' | 'center' | 'right'
+ *  align?: 'top' | 'center' | 'bottom'
+ *  autoHide?: boolean
+ * }} props
+ */
+export default function Dropdown({ icon, children, buttonClass, justify = 'left', align = 'center', autoHide = false }) {
   const [show, setShow] = useState(false)
   const dropdownRef = useRef(null)
 
@@ -11,7 +21,6 @@ export default function Dropdown({ icon, children, justify, align }) {
         if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
           setShow(false)
         }
-        setTimeout(() => setShow(false), 200)
       }
 
       document.addEventListener('mousedown', handleClick)
@@ -22,9 +31,18 @@ export default function Dropdown({ icon, children, justify, align }) {
     }
   }, [show])
 
+  const handleChildClick = (e, originalOnClick) => {
+    if (originalOnClick) originalOnClick(e)
+    if (autoHide) setShow(false)
+  }
+
+  const clonedChildren = Children.map(children, (child) =>
+    cloneElement(child, { onClick: e => handleChildClick(e, child.props.onClick) })
+  )
+
   return (
     <div className="Dropdown" ref={dropdownRef}>
-      <button onClick={() => setShow(!show)}>
+      <button className={buttonClass} type='button' onClick={() => setShow(!show)}>
         <div className="iconContainer">
           {icon}
         </div>
@@ -32,7 +50,7 @@ export default function Dropdown({ icon, children, justify, align }) {
       {show && (
         <div className={'floatContainer' + ` justify-${justify}` + ` align-${align}`}>
           <div className="container">
-            {children}
+            {clonedChildren}
           </div>
         </div>
       )}

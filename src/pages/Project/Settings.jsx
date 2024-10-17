@@ -38,8 +38,8 @@ export default function ProjectSettings() {
       <h2>Configurações</h2>
       <p>Gerencie as configurações do seu projeto aqui</p>
     </div>
-    <div className="grid-row">
-      <section>
+    <div className="flex-col">
+      <section className="mini">
         <h3>Detalhes</h3>
         <hr />
         <form autoComplete="off" onSubmit={handleProjectUpdate}>
@@ -48,11 +48,9 @@ export default function ProjectSettings() {
           <button className="button primary">Atualizar</button>
         </form>
       </section>
-      <section></section>
     </div>
-    <div className="grid-row">
-      <section></section>
-      <section>
+    <div className="flex-col">
+      <section className="mini">
         <h3>Ações</h3>
         <hr />
         <div className="grid-row">
@@ -74,7 +72,6 @@ export default function ProjectSettings() {
           </button>
         </div>
       </section>
-      <section></section>
     </div>
   </>
 }
