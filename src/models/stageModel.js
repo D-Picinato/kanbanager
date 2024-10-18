@@ -19,7 +19,7 @@ export default class StageModel {
   // Método para criar um stage
   create = name => {
     this.#list.push({
-      id: `${Date.now()}${Math.round()}${Math.round()}`,
+      id: `${Date.now()}${Math.random()}${Math.random()}`,
       name: name,
     })
 

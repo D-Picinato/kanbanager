@@ -41,7 +41,7 @@ export default function ProjectCreateIssue() {
       <section className="mini">
         <h3>Inicie sua Issue</h3>
         <hr />
-        <form onSubmit={handleCreateIssue}>
+        <form onSubmit={handleCreateIssue} autoComplete="off">
           <Input required type="text" label='Nome da issue' idname='name' />
           <Textarea label='Descrição' idname='description' />
           <div className="grid-row">
@@ -69,7 +69,7 @@ export default function ProjectCreateIssue() {
                 autoHide
               >
                 {stageModel.list().map(stage => (
-                  <button type="button" className="button normal left" onClick={() => setIdStageParent(stage.id)}>{stage.name}</button>
+                  <button key={stage.id} type="button" className="button normal left" onClick={() => setIdStageParent(stage.id)}>{stage.name}</button>
                 ))}
               </Dropdown>
             </div>

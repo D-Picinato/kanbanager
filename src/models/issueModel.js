@@ -18,7 +18,7 @@ export default class IssueModel {
   // Método para criar uma issue
   create = ({ idStageParent, name, description, priority }) => {
     this.#list.push({
-      id: `${Date.now()}${Math.round()}${Math.round()}`,
+      id: `${Date.now()}${Math.random()}${Math.random()}`,
       idStageParent: idStageParent,
       name: name,
       description: description,

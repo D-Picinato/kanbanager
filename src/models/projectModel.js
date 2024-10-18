@@ -21,15 +21,15 @@ class ProjectModel {
       description: formData.get('description'),
       stages: [
         {
-          id: `${Date.now()}${Math.round()}${Math.round()}`,
+          id: `${Date.now()}${Math.random()}${Math.random()}`,
           name: 'A Fazer',
         },
         {
-          id: `${Date.now()}${Math.round()}${Math.round()}`,
+          id: `${Date.now()}${Math.random()}${Math.random()}`,
           name: 'Em andamento',
         },
         {
-          id: `${Date.now()}${Math.round()}${Math.round()}`,
+          id: `${Date.now()}${Math.random()}${Math.random()}`,
           name: 'Concluído',
         }
       ],
