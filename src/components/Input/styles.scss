@@ -7,6 +7,7 @@
   border-bottom: $border;
   border-radius: 8rem;
   padding-top: 16rem;
+  width: 100%;
 
   * {
     outline: none;
@@ -27,7 +28,8 @@
   }
 
   textarea {
-    min-height: 40rem !important;
+    resize: none;
+    overflow: hidden;
   }
 
   .label {

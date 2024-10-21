@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import useAppContext from "../../contexts/AppContext"
 import { Link, useNavigate } from "react-router-dom"
 import Input from "../../components/Input/Input"
+import Textarea from "../../components/Input/Textarea"
 import useModalContext from "../../contexts/ModalContext"
 import { HiOutlineDocumentArrowDown, HiOutlineTrash } from "react-icons/hi2"
 import projectModel from "../../models/projectModel"
@@ -12,7 +13,7 @@ export default function ProjectSettings() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setPath(<span><Link to='/'>Projetos</Link> / {project.name} / Configurações</span>)
+    setPath(<span><Link to='/'>Projetos</Link> / {project.data.name} / Configurações</span>)
   }, [project])
 
   const handleRemoveProject = (projectId) => {
@@ -40,11 +41,11 @@ export default function ProjectSettings() {
     </div>
     <div className="flex-col">
       <section className="mini">
-        <h3>Detalhes</h3>
+        <h3>Detalhes do Projeto</h3>
         <hr />
         <form autoComplete="off" onSubmit={handleProjectUpdate}>
           <Input idname='name' label='Nome do projeto' defaultValue={project.name} />
-          <Input idname='description' label='Descrição' defaultValue={project.description} />
+          <Textarea idname='description' label='Descrição' defaultValue={project.description} />
           <button className="button primary">Atualizar</button>
         </form>
       </section>

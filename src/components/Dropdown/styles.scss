@@ -4,6 +4,16 @@
 .Dropdown {
   position: relative;
 
+  .label {
+    display: block;
+    padding: 16rem;
+    text-wrap: nowrap;
+  }
+
+  hr {
+    margin: 8rem 0;
+  }
+
   >button {
     .iconContainer {
       display: flex;
@@ -54,7 +64,8 @@
     }
 
     .container {
-      @include glass;
+      @include shadow;
+      background: $tom-claro;
       padding: 8rem;
       border-radius: 16rem;
     }

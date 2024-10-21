@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import useAppContext from "../../contexts/AppContext"
 import { Link } from "react-router-dom"
+import useAppContext from "../../contexts/AppContext"
 import Input from "../../components/Input/Input"
+import Issue from "../../components/Issue"
 import Dropdown from "../../components/Dropdown"
 import StageModel from "../../models/stageModel"
 import IssueModel from "../../models/issueModel"
 import { HiBars3, HiOutlineArrowLeft, HiOutlineArrowRight, HiOutlineTrash, HiXMark } from "react-icons/hi2"
-import PriorityIcon from "../../components/PriorityIcon"
 
 export default function ProjectQuadro() {
   const { project, setPath } = useAppContext()
@@ -14,33 +14,19 @@ export default function ProjectQuadro() {
   const [issueModel, setIssueModel] = useState(new IssueModel(project.id))
 
   useEffect(() => {
-    setPath(
-      <span>
-        <Link to="/">Projetos</Link> / {project.name} / Quadro
-      </span>
-    )
-
-    const mainElement = document.querySelector("main")
-
-    if (mainElement) {
-      const handleScroll = e => {
-        e.preventDefault()
-        mainElement.scrollLeft += e.deltaY
-      }
-
-      mainElement.addEventListener("wheel", handleScroll)
-
-      return () => {
-        mainElement.removeEventListener("wheel", handleScroll)
-      }
-    }
+    setPath(<span><Link to='/'>Projetos</Link> / {project.data.name} / Quadro</span>)
   }, [project])
+
+  const resetStageModel = () => {
+    setStageModel(new StageModel(project.id))
+    setIssueModel(new IssueModel(project.id))
+  }
 
   const handleCreateStage = e => {
     e.preventDefault()
     const formData = new FormData(e.target)
     stageModel.create(formData.get("name"))
-    setStageModel(new StageModel(project.id))
+    resetStageModel()
     e.target.reset()
   }
 
@@ -56,27 +42,25 @@ export default function ProjectQuadro() {
       {stageModel.list().map((stage, i) => (
         <section key={stage.id}>
           <div className="flex-row">
-            <div className="flex-row">
-              <input
-                name="name"
-                autoComplete="off"
-                className="inlineInput h3"
-                type="text"
-                defaultValue={stage.name}
-                key={`input${stage.id}`}
-                onChange={e =>
-                  stageModel.update(stage.id, { name: e.target.value })
-                }
-              />
-            </div>
-            <Dropdown icon={<HiBars3 />} justify="left" align="bottom" autoHide>
+            <input
+              name="name"
+              autoComplete="off"
+              className="inlineInput h3"
+              type="text"
+              defaultValue={stage.name}
+              key={`input${stage.id}`}
+              onChange={e =>
+                stageModel.update(stage.id, { name: e.target.value })
+              }
+            />
+            <Dropdown icon={<HiBars3 />} justify="left" align="bottom" buttonClass="button normal" autoHide>
               <div className="grid-row no-gap">
                 {i > 0 ? (
                   <button
                     className="button normal toLeftButton"
                     onClick={() => {
                       stageModel.moveToLeft(stage.id)
-                      setStageModel(new StageModel(project.id))
+                      resetStageModel()
                     }}
                   >
                     <HiOutlineArrowLeft />
@@ -91,7 +75,7 @@ export default function ProjectQuadro() {
                     className="button normal toRightButton"
                     onClick={() => {
                       stageModel.moveToRight(stage.id)
-                      setStageModel(new StageModel(project.id))
+                      resetStageModel()
                     }}
                   >
                     <HiOutlineArrowRight />
@@ -106,7 +90,7 @@ export default function ProjectQuadro() {
                 className="button red left"
                 onClick={() => {
                   stageModel.remove(stage.id)
-                  setStageModel(new StageModel(project.id))
+                  resetStageModel()
                 }}
               >
                 <HiOutlineTrash />
@@ -117,10 +101,12 @@ export default function ProjectQuadro() {
           <hr />
           <div className="issuesContainer">
             {issueModel.list().filter(issue => issue.idStageParent === stage.id).map(issue => (
-              <div key={issue.id} className="issueItem">
-                <PriorityIcon high={issue.priority} />
-                <span>{issue.name}</span>
-              </div>
+              <Issue
+                key={`${issue.id}${Math.random()}`}
+                projectId={project.id}
+                issueId={issue.id}
+                resetCallback={resetStageModel}
+              />
             ))}
           </div>
         </section>

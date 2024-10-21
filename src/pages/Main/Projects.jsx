@@ -72,10 +72,10 @@ export default function ProjectsPage() {
             {projectList.map((item, i) => (
               <tr key={i}>
                 <td>
-                  <Link to={`/projects/${item.id}`}><span>{item.name}</span></Link>
+                  <Link to={`/projects/${item.id}`}><span>{item.data.name}</span></Link>
                 </td>
                 <td>
-                  <Link to={`/projects/${item.id}`}><span>{item.description}</span></Link>
+                  <Link to={`/projects/${item.id}`}><span>{item.data.description}</span></Link>
                 </td>
                 <td>
                   <Dropdown justify='left' align='center' icon={<HiOutlineEllipsisHorizontal />}>

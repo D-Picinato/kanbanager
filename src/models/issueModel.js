@@ -7,7 +7,7 @@ export default class IssueModel {
   // Recupera a lista de issues do projeto referenciado pelo ID e atribui à `#list`
   constructor(projectId) {
     this.#projectId = projectId
-    this.#list = projectModel.get(projectId).issues
+    this.#list = projectModel.get(projectId).data.issues
   }
 
   // Método para salvar a lista de issues `#list` no projeto referenciado pelo ID
@@ -23,7 +23,7 @@ export default class IssueModel {
       name: name,
       description: description,
       priority: priority,
-      creationDate: new Date(),
+      creationDatetime: new Date(),
     })
 
     this.#saveList()

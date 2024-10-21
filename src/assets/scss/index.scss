@@ -90,9 +90,6 @@ button,
 input,
 textarea {
   font-size: 16rem;
-}
-
-textarea {
   font-family: 'Raleway';
 }
 
@@ -120,6 +117,7 @@ button {
   border: none;
   background: none;
   transition: background .3s ease;
+  text-wrap: nowrap;
 
   &.button {
     width: 100%;
@@ -128,7 +126,6 @@ button {
     padding: 8rem;
     border-radius: 8rem;
     height: 40rem;
-    text-wrap: nowrap;
 
     &.fit {
       width: fit-content;
@@ -274,28 +271,27 @@ main {
 
   .kanbanStages {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 16rem;
-    width: fit-content;
+    width: 100%;
 
     section {
-      width: 320rem;
+      width: fit-content;
       height: fit-content;
+
+      &:hover {
+        z-index: 1;
+      }
 
       .issuesContainer {
         background: $primary-20;
         padding: 8rem;
         border-radius: 8rem;
-        min-height: 100rem;
-
-        .issueItem {
-          @include glass;
-          display: flex;
-          align-items: center;
-          padding: 8rem;
-          width: 100%;
-          height: 100%;
-          border-radius: 8rem;
-        }
+        display: flex;
+        flex-direction: column;
+        gap: 8rem;
+        min-height: 70rem;
       }
     }
   }
@@ -451,13 +447,16 @@ form {
 .inlineInput {
   background: none;
   border: none;
-  padding: 0;
   width: 100%;
+  color: $secondary;
+  padding: 8rem;
 
   &.h3 {
-    padding: 8rem;
-    color: $secondary;
     font-size: 24rem;
     font-family: 'Raleway bold';
+  }
+
+  &.span {
+    font-family: 'Raleway';
   }
 }

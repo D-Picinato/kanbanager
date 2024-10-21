@@ -17,7 +17,7 @@ export default function ProjectCreateIssue() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    setPath(<span><Link to='/'>Projetos</Link> / {project.name} / Criar Issue</span>)
+    setPath(<span><Link to='/'>Projetos</Link> / {project.data.name} / Criar Issue</span>)
   }, [project])
 
   const handleCreateIssue = e => {

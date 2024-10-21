@@ -1,0 +1,42 @@
+@use '../../assets/scss/mixins.scss' as *;
+@use '../../assets/scss/variables.scss' as *;
+
+.Issue {
+  @include glass;
+  align-items: center;
+  gap: 8rem;
+  padding: 8rem;
+  width: 100%;
+  border-radius: 8rem;
+  display: grid;
+  grid-template: min-content / min-content auto min-content;
+
+  &:hover {
+    z-index: 1;
+  }
+
+  &.maximized {
+    align-items: normal;
+    display: flex;
+    flex-direction: column;
+
+    .issueHead {
+      display: grid;
+      grid-template: min-content / min-content 1fr min-content;
+      align-items: center;
+      gap: 8rem;
+      justify-items: center;
+    }
+  }
+
+  button svg {
+    font-size: 24rem;
+  }
+
+  .maximizeIssueBtn {
+    display: inline;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

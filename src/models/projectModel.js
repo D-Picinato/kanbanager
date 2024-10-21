@@ -15,14 +15,13 @@ class ProjectModel {
   create = e => {
     const formData = new FormData(e.target)
 
-    this.#list.push({
-      id: `${Date.now()}${Math.random()}${Math.random()}`,
+    const dataProject = {
       name: formData.get('name'),
       description: formData.get('description'),
       stages: [
         {
           id: `${Date.now()}${Math.random()}${Math.random()}`,
-          name: 'A Fazer',
+          name: 'A fazer',
         },
         {
           id: `${Date.now()}${Math.random()}${Math.random()}`,
@@ -33,7 +32,19 @@ class ProjectModel {
           name: 'Concluído',
         }
       ],
-      issues: []
+      issues: [],
+    }
+
+    this.#list.push({
+      id: `${Date.now()}${Math.random()}${Math.random()}`,
+      data: dataProject,
+      allowHistory: false,
+      history: [
+        {
+          datetime: new Date(),
+          data: dataProject,
+        }
+      ]
     })
 
     this.#saveList()
@@ -48,11 +59,11 @@ class ProjectModel {
   get = projectId => {
     const filteredProject = this.#list.filter(item => item.id == projectId)[0]
 
-    if (!filteredProject) location.reload()
     // if (!filteredProject) throw new Error('Projeto não encontrado!')
+    if (!filteredProject) location.reload()
 
     /**
-     * Deixei com esse if para recarregar a página quando não encontra o projeto, por causa deste bug:
+     * Deixei com esse if para recarregar a página quando não encontra o projeto por causa deste bug:
      * 
      * Quando você criar um projeto e logo em seguida o abrir, o stageModel irá buscar o projeto através do método
      * projectModel.get(), o método consegue recuperar todos os projetos corretamente, mas ele por algum motivo dá erro,
@@ -74,13 +85,25 @@ class ProjectModel {
     this.#saveList()
   }
 
-  // Método para atualizar um projeto
+  // Método para atualizar um projeto e seu histórico
   update = (projectId, obj) => {
     this.#list = this.#list.map(item => {
       if (item.id == projectId) {
-        return { ...item, ...obj }
+        return {
+          ...item,
+          data: {
+            ...item.data,
+            ...obj
+          },
+          history: item.allowHistory ? [
+            ...item.history,
+            {
+              datetime: new Date(),
+              data: item
+            }
+          ] : item.history
+        }
       }
-
       return item
     })
 
@@ -93,7 +116,7 @@ class ProjectModel {
     const blob = new Blob([JSON.stringify(project)], { type: 'application/json' })
     const a = document.createElement('a')
     a.href = URL.createObjectURL(blob)
-    a.download = `${project.name}.kanbanager`
+    a.download = `${project.data.name}.kanbanager`
     a.click()
     URL.revokeObjectURL(URL.createObjectURL(blob))
   }

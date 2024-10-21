@@ -8,7 +8,7 @@ export default class StageModel {
   // Recupera a lista de stages do projeto referenciado pelo ID e atribui à `#list`
   constructor(projectId) {
     this.#projectId = projectId
-    this.#list = projectModel.get(projectId).stages
+    this.#list = projectModel.get(projectId).data.stages
   }
 
   // Método para salvar a lista de stages `#list` no projeto referenciado pelo ID

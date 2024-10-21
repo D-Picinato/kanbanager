@@ -1,9 +1,13 @@
 @use './variables.scss' as *;
 
 @mixin glass {
-  box-shadow: 0 8rem 16rem $tom-escuro-20;
+  @include shadow;
   background: $white-80;
   backdrop-filter: blur(16rem);
+}
+
+@mixin shadow {
+  box-shadow: 0 8rem 16rem $tom-escuro-20;
   transition: box-shadow .3s ease;
 
   &:hover {
