@@ -44,8 +44,8 @@ export default function ProjectSettings() {
         <h3>Detalhes do Projeto</h3>
         <hr />
         <form autoComplete="off" onSubmit={handleProjectUpdate}>
-          <Input idname='name' label='Nome do projeto' defaultValue={project.name} />
-          <Textarea idname='description' label='Descrição' defaultValue={project.description} />
+          <Input idname='name' label='Nome do projeto' defaultValue={project.data.name} />
+          <Textarea idname='description' label='Descrição' defaultValue={project.data.description} />
           <button className="button primary">Atualizar</button>
         </form>
       </section>
