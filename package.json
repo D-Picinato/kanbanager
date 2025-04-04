@@ -1,8 +1,13 @@
 {
   "name": "kanbanager",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
+  "license": "MIT",
+  "author": {
+    "name": "Dimas Picinato",
+    "email": "contato@dpicinato.com",
+    "url": "https://dpicinato.com"
+  },
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
